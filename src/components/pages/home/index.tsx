@@ -22,6 +22,11 @@ export default function HomePage() {
       </NavStyles>
       <MainStyles>
         <Filter />
+        <div className="content">
+          {state.loading && <span>loading...</span>}
+          {state.error && !state.loading && <span>error!</span>}
+          {!state.loading && !state.error && <span>data here!</span>}
+        </div>
       </MainStyles>
     </>
   );
