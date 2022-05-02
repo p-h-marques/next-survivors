@@ -23,9 +23,12 @@ export interface IFilters {
   select: EnumFilters;
 }
 
-export interface IGlobalState {
+export interface IRequest {
   loading: boolean;
   error: boolean;
-  filters: IFilters;
   data: ISurvivor[];
+}
+
+export interface IGlobalState extends IRequest {
+  filters: IFilters;
 }
