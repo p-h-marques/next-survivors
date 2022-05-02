@@ -32,3 +32,8 @@ export interface IRequest {
 export interface IGlobalState extends IRequest {
   filters: IFilters;
 }
+
+export interface INationality {
+  name?: string;
+  flag?: string;
+}

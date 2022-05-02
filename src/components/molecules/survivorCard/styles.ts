@@ -32,6 +32,13 @@ export const SurvivorCardStyles = styled.div<ISurvivor>`
       font-size: 12px;
       line-height: 12px;
     }
+
+    .nationality {
+      height: 12px;
+      position: relative;
+      display: flex;
+      column-gap: 4px;
+    }
   }
 
   .infected {
