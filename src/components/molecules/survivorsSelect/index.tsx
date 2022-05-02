@@ -4,7 +4,11 @@ import { SelectStyles } from './styles';
 import ImgDropdown from '../../../assets/dropdown.svg';
 
 import Context from '../../../state/Context';
-import { filterSelectUpdate } from '../../../state/actions';
+import {
+  filterSelectUpdate,
+  loadingStatusUpdate,
+  requestUpdate,
+} from '../../../state/actions';
 import { EnumFilters } from '../../../models';
 import { getSurvivors } from '../../../repository/survivors.repository';
 
@@ -19,9 +23,11 @@ export default function Select() {
 
   const [isDropdownVisible, setDropdownVisibility] = useState(false);
 
-  const startRequest = useCallback(() => {
-    getSurvivors(state.filters);
-  }, [state.filters]);
+  const startRequest = useCallback(async () => {
+    dispatch(loadingStatusUpdate(true));
+    const request = await getSurvivors(state.filters);
+    dispatch(requestUpdate(request));
+  }, [state.filters, dispatch]);
 
   const handleSelectChange = useCallback(
     (e: EnumFilters) => {

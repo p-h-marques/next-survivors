@@ -1,4 +1,4 @@
-import { IGlobalActions, IGlobalState } from '../models';
+import { IGlobalActions, IGlobalState, IRequest } from '../models';
 import * as types from './types';
 
 function reducer(state: IGlobalState, action: IGlobalActions) {
@@ -19,6 +19,21 @@ function reducer(state: IGlobalState, action: IGlobalActions) {
           ...state.filters,
           input: action.payload,
         },
+      };
+
+    case types.LOADING_STATUS_UPDATE:
+      return {
+        ...state,
+        loading: action.payload,
+      };
+
+    case types.REQUEST_UPDATE:
+      const payload = action.payload as IRequest;
+
+      return {
+        ...state,
+        data: [],
+        ...payload,
       };
 
     default:

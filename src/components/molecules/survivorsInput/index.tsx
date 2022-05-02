@@ -1,15 +1,21 @@
 import { useCallback, useContext } from 'react';
 import { getSurvivors } from '../../../repository/survivors.repository';
-import { filterInputUpdate } from '../../../state/actions';
+import {
+  filterInputUpdate,
+  loadingStatusUpdate,
+  requestUpdate,
+} from '../../../state/actions';
 import Context from '../../../state/Context';
 import { InputStyles } from './styles';
 
 export default function Input() {
   const { state, dispatch } = useContext(Context);
 
-  const startRequest = useCallback(() => {
-    getSurvivors(state.filters);
-  }, [state.filters]);
+  const startRequest = useCallback(async () => {
+    dispatch(loadingStatusUpdate(true));
+    const request = await getSurvivors(state.filters);
+    dispatch(requestUpdate(request));
+  }, [state.filters, dispatch]);
 
   const changeSurvivorsInput = useCallback(
     (e: Event) => {

@@ -15,7 +15,7 @@ export interface ISurvivor {
 
 export interface IGlobalActions {
   type: string;
-  payload: EnumFilters & string;
+  payload: EnumFilters & string & boolean & IRequest;
 }
 
 export interface IFilters {
