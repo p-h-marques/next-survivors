@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongodb';
 import { NextApiRequest, NextApiResponse } from 'next';
 import clientPromise from '../../../utils/mongodb';
 
@@ -5,11 +6,31 @@ const handler = async (
   req: NextApiRequest,
   res: NextApiResponse,
 ): Promise<boolean> => {
+  console.log(req.query);
+
   try {
-    if (req.method === 'GET') {
+    if (req.method === 'PUT') {
       const client = await clientPromise;
       const database = client.db('survivors');
-      const data = await database.collection('survivors').find({}).toArray();
+
+      await database.collection('survivors').update(
+        {
+          _id: new ObjectId(req.query.survivor as string),
+        },
+        {
+          $set: {
+            isInfected: !!req.query.value,
+          },
+        },
+        {
+          multi: false,
+        },
+      );
+
+      const data = await database
+        .collection('survivors')
+        .find({ _id: new ObjectId(req.query.survivor as string) })
+        .toArray();
 
       res.status(200).json(data);
       return true;
