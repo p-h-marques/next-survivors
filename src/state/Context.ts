@@ -13,4 +13,5 @@ export const initialState: IGlobalState = {
     select: EnumFilters.ALL,
   },
   data: [],
+  details: null,
 };

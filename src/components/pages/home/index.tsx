@@ -33,7 +33,7 @@ export default function HomePage() {
           {!state.loading && !state.error && <SurvivorsGrid />}
         </div>
       </MainStyles>
-      <SurvivorDetails></SurvivorDetails>
+      {state.details && <SurvivorDetails></SurvivorDetails>}
     </>
   );
 }

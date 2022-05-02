@@ -1,4 +1,9 @@
-import { IGlobalActions, IGlobalState, IRequest } from '../models';
+import {
+  IGlobalActions,
+  IGlobalState,
+  IRequest,
+  ISurvivorDetails,
+} from '../models';
 import * as types from './types';
 
 function reducer(state: IGlobalState, action: IGlobalActions) {
@@ -34,6 +39,22 @@ function reducer(state: IGlobalState, action: IGlobalActions) {
         ...state,
         data: [],
         ...payload,
+      };
+
+    case types.OPEN_SURVIVOR_DETAILS:
+      const payloadDetails = action.payload as ISurvivorDetails;
+
+      return {
+        ...state,
+        details: {
+          ...payloadDetails,
+        },
+      };
+
+    case types.CLOSE_SURVIVOR_DETAILS:
+      return {
+        ...state,
+        details: null,
       };
 
     default:

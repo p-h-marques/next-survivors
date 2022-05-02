@@ -15,7 +15,7 @@ export interface ISurvivor {
 
 export interface IGlobalActions {
   type: string;
-  payload: EnumFilters & string & boolean & IRequest;
+  payload: EnumFilters & string & boolean & IRequest & ISurvivorDetails;
 }
 
 export interface IFilters {
@@ -29,8 +29,17 @@ export interface IRequest {
   data: ISurvivor[];
 }
 
+export interface ISurvivorDetails {
+  name: string;
+  age: number;
+  isInfected: boolean;
+  country?: string;
+  flag?: string;
+}
+
 export interface IGlobalState extends IRequest {
   filters: IFilters;
+  details: ISurvivorDetails | null;
 }
 
 export interface INationality {

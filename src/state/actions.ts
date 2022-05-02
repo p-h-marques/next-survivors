@@ -1,4 +1,4 @@
-import { EnumFilters, IRequest } from '../models';
+import { EnumFilters, IRequest, ISurvivorDetails } from '../models';
 import * as types from './types';
 
 export function filterSelectUpdate(data: EnumFilters) {
@@ -26,5 +26,18 @@ export function requestUpdate(data: IRequest) {
   return {
     type: types.REQUEST_UPDATE,
     payload: data,
+  };
+}
+
+export function openSurvivorDetails(data: ISurvivorDetails) {
+  return {
+    type: types.REQUEST_UPDATE,
+    payload: data,
+  };
+}
+
+export function closeSurvivorDetails() {
+  return {
+    type: types.REQUEST_UPDATE,
   };
 }
