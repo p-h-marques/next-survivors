@@ -6,6 +6,7 @@ import { MainStyles, NavStyles } from './styles';
 import ImgLogo from '../../../assets/logo.svg';
 
 import Filter from '../../organisms/filter';
+import Loading from '../../atoms/loading';
 
 export default function HomePage() {
   const { state } = useContext(Context);
@@ -23,7 +24,9 @@ export default function HomePage() {
       <MainStyles>
         <Filter />
         <div className="content">
-          {state.loading && <span>loading...</span>}
+          <div style={{ display: state.loading ? 'block' : 'none' }}>
+            <Loading />
+          </div>
           {state.error && !state.loading && <span>error!</span>}
           {!state.loading && !state.error && <span>data here!</span>}
         </div>
