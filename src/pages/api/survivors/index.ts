@@ -7,9 +7,20 @@ const handler = async (
 ): Promise<boolean> => {
   try {
     if (req.method === 'GET') {
+      const search = {
+        name: { $regex: new RegExp(req.query.name as string, 'i') },
+      };
+
+      if (req.query.infected) {
+        search['isInfected'] = req.query.infected === 'true';
+      }
+
       const client = await clientPromise;
       const database = client.db('survivors');
-      const data = await database.collection('survivors').find({}).toArray();
+      const data = await database
+        .collection('survivors')
+        .find(search)
+        .toArray();
 
       res.status(200).json(data);
       return true;

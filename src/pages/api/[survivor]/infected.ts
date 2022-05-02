@@ -19,7 +19,7 @@ const handler = async (
         },
         {
           $set: {
-            isInfected: !!req.query.value,
+            isInfected: req.query.value === 'true',
           },
         },
         {
