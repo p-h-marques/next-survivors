@@ -1,21 +1,34 @@
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import Image from 'next/image';
 import Context from '../../../state/Context';
+import { filterSelectUpdate } from '../../../state/actions';
 import { EnumFilters } from '../../../models';
 
 import { FilterStyles, MainStyles, NavStyles } from './styles';
 import ImgLogo from '../../../assets/logo.svg';
 import ImgDropdown from '../../../assets/dropdown.svg';
 
+const filters: EnumFilters[] = [
+  EnumFilters.ALL,
+  EnumFilters.INFECTED,
+  EnumFilters.CURED,
+];
+
 export default function HomePage() {
-  const [filter, setFilter] = useState(EnumFilters.ALL);
   const [isDropdownVisible, setDropdownVisibility] = useState(false);
 
-  const { state } = useContext(Context);
+  const { state, dispatch } = useContext(Context);
 
   useEffect(() => {
     console.log(state);
   }, [state]);
+
+  const handleSelectChange = useCallback(
+    (e: EnumFilters) => {
+      dispatch(filterSelectUpdate(e));
+    },
+    [dispatch],
+  );
 
   return (
     <>
@@ -30,7 +43,7 @@ export default function HomePage() {
             className="selector"
             onClick={() => setDropdownVisibility(!isDropdownVisible)}
           >
-            <span>{filter}</span>
+            <span>{state.filters.select}</span>
             <Image
               src={ImgDropdown}
               style={{
@@ -43,30 +56,17 @@ export default function HomePage() {
                 display: isDropdownVisible ? 'block' : 'none',
               }}
             >
-              <div
-                className="dropdown__option"
-                onClick={() => {
-                  setFilter(EnumFilters.ALL);
-                }}
-              >
-                {EnumFilters.ALL}
-              </div>
-              <div
-                className="dropdown__option"
-                onClick={() => {
-                  setFilter(EnumFilters.INFECTED);
-                }}
-              >
-                {EnumFilters.INFECTED}
-              </div>
-              <div
-                className="dropdown__option"
-                onClick={() => {
-                  setFilter(EnumFilters.CURED);
-                }}
-              >
-                {EnumFilters.CURED}
-              </div>
+              {filters.map((filter) => (
+                <div
+                  key={filter}
+                  className="dropdown__option"
+                  onClick={() => {
+                    handleSelectChange(filter);
+                  }}
+                >
+                  {filter}
+                </div>
+              ))}
             </div>
           </div>
         </FilterStyles>
