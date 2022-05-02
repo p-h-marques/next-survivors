@@ -1,3 +1,5 @@
+import HomePage from '../components/pages/home';
+
 export default function Home() {
-  return <h1>Olá, tudo bom?</h1>;
+  return <HomePage />;
 }
