@@ -16,4 +16,10 @@ export const MainStyles = styled.main`
   align-items: center;
   justify-content: flex-start;
   row-gap: 60px;
+
+  .content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
 `;

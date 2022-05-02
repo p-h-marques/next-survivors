@@ -7,6 +7,7 @@ import ImgLogo from '../../../assets/logo.svg';
 
 import Filter from '../../organisms/filter';
 import Loading from '../../atoms/loading';
+import SurvivorsGrid from '../../organisms/survivorsGrid';
 
 export default function HomePage() {
   const { state } = useContext(Context);
@@ -28,7 +29,7 @@ export default function HomePage() {
             <Loading />
           </div>
           {state.error && !state.loading && <span>error!</span>}
-          {!state.loading && !state.error && <span>data here!</span>}
+          {!state.loading && !state.error && <SurvivorsGrid />}
         </div>
       </MainStyles>
     </>
