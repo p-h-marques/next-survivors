@@ -1,4 +1,4 @@
-import { useCallback, useContext, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { SelectStyles } from './styles';
 import ImgDropdown from '../../../assets/dropdown.svg';
@@ -6,6 +6,7 @@ import ImgDropdown from '../../../assets/dropdown.svg';
 import Context from '../../../state/Context';
 import { filterSelectUpdate } from '../../../state/actions';
 import { EnumFilters } from '../../../models';
+import { getSurvivors } from '../../../repository/survivors.repository';
 
 const filters: EnumFilters[] = [
   EnumFilters.ALL,
@@ -18,12 +19,20 @@ export default function Select() {
 
   const [isDropdownVisible, setDropdownVisibility] = useState(false);
 
+  const startRequest = useCallback(() => {
+    getSurvivors(state.filters);
+  }, [state.filters]);
+
   const handleSelectChange = useCallback(
     (e: EnumFilters) => {
       dispatch(filterSelectUpdate(e));
     },
     [dispatch],
   );
+
+  useEffect(() => {
+    startRequest();
+  }, [state.filters.select, startRequest]);
 
   return (
     <SelectStyles onClick={() => setDropdownVisibility(!isDropdownVisible)}>

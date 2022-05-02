@@ -18,12 +18,14 @@ export interface IGlobalActions {
   payload: EnumFilters & string;
 }
 
+export interface IFilters {
+  input: string;
+  select: EnumFilters;
+}
+
 export interface IGlobalState {
   loading: boolean;
   error: boolean;
-  filters: {
-    input: string;
-    select: EnumFilters;
-  };
+  filters: IFilters;
   data: ISurvivor[];
 }
