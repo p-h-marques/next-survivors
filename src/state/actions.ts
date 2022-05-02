@@ -31,13 +31,13 @@ export function requestUpdate(data: IRequest) {
 
 export function openSurvivorDetails(data: ISurvivorDetails) {
   return {
-    type: types.REQUEST_UPDATE,
+    type: types.OPEN_SURVIVOR_DETAILS,
     payload: data,
   };
 }
 
 export function closeSurvivorDetails() {
   return {
-    type: types.REQUEST_UPDATE,
+    type: types.CLOSE_SURVIVOR_DETAILS,
   };
 }

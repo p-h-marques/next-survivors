@@ -1,10 +1,14 @@
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
-import { INationality, ISurvivor } from '../../../models';
+import { useCallback, useContext, useEffect, useState } from 'react';
+import { INationality, ISurvivor, ISurvivorDetails } from '../../../models';
 import { getNationalityInfo } from '../../../repository/nationality.repository';
+import { openSurvivorDetails } from '../../../state/actions';
+import Context from '../../../state/Context';
 import { SurvivorCardStyles } from './styles';
 
 export default function SurvivorCard(props: ISurvivor) {
+  const { dispatch } = useContext(Context);
+
   const [nationality, setNationality] = useState<INationality>({});
 
   useEffect(() => {
@@ -16,8 +20,21 @@ export default function SurvivorCard(props: ISurvivor) {
     fetchNationalityInfo();
   }, [props.nationality]);
 
+  const handleSurvivorDetails = useCallback(() => {
+    const survivorDetails: ISurvivorDetails = {
+      name: props.name,
+      age: props.age,
+      isInfected: props.isInfected,
+      photo: props.photo,
+      country: nationality.name,
+      flag: nationality.flag,
+    };
+
+    dispatch(openSurvivorDetails(survivorDetails));
+  }, [props, nationality, dispatch]);
+
   return (
-    <SurvivorCardStyles {...props}>
+    <SurvivorCardStyles {...props} onClick={handleSurvivorDetails}>
       <div className="image">
         <Image src={props.photo} width={64} height={64} />
       </div>

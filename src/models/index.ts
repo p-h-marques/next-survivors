@@ -33,6 +33,7 @@ export interface ISurvivorDetails {
   name: string;
   age: number;
   isInfected: boolean;
+  photo: string;
   country?: string;
   flag?: string;
 }

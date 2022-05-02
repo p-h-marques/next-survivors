@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-export const SurvivorDetailsModal = styled.div`
+export const SurvivorDetailsModalStyles = styled.div`
   position: absolute;
   top: 0px;
   left: 0px;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.24);
+  background-color: rgba(0, 0, 0, 0.64);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -63,6 +63,13 @@ export const SurvivorDetailsModal = styled.div`
       }
     }
 
+    &__nationality {
+      height: 14px;
+      position: relative;
+      display: flex;
+      column-gap: 4px;
+    }
+
     &__action {
       font-size: 14px;
       line-height: 14px;
@@ -73,6 +80,14 @@ export const SurvivorDetailsModal = styled.div`
 
       &:hover {
         background-color: ${({ theme }) => theme.colors.cured_hover};
+      }
+
+      &--cured {
+        background-color: ${({ theme }) => theme.colors.danger};
+
+        &:hover {
+          background-color: ${({ theme }) => theme.colors.danger_hover};
+        }
       }
     }
   }

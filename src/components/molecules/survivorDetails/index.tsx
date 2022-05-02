@@ -1,22 +1,27 @@
 import Image from 'next/image';
-import { SurvivorDetailsModal } from './styles';
+import { SurvivorDetailsModalStyles } from './styles';
 
 import ImgClose from '../../../assets/close.svg';
 import ImgCloseHover from '../../../assets/close_hover.svg';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import Context from '../../../state/Context';
+import { closeSurvivorDetails } from '../../../state/actions';
 
 export default function SurvivorDetails() {
+  const { state, dispatch } = useContext(Context);
+
   const [image, setImage] = useState(ImgClose);
 
   return (
-    <SurvivorDetailsModal>
+    <SurvivorDetailsModalStyles>
       <div className="modal">
         <div className="modal__header">
-          <span>Jim Carrey</span>
+          <span>{state.details.name}</span>
           <Image
             src={image}
             onMouseEnter={() => setImage(ImgCloseHover)}
             onMouseLeave={() => setImage(ImgClose)}
+            onClick={() => dispatch(closeSurvivorDetails())}
             style={{ cursor: 'pointer' }}
             width={16}
             height={16}
@@ -25,25 +30,28 @@ export default function SurvivorDetails() {
 
         <div className="modal__content">
           <div className="modal__image">
-            <Image
-              src={
-                'https://res.cloudinary.com/teste-pedro-marques/image/upload/v1651455341/survivors/dwight_ea1c0s.png'
-              }
-              width={120}
-              height={120}
-            />
+            <Image src={state.details.photo} width={120} height={120} />
           </div>
 
           <div className="modal__infos">
             <div className="modal__info">
-              <p>United States</p>
-              <p>Age: 32</p>
-              <p>Status: Infected</p>
+              <div className="modal__nationality">
+                <Image src={state.details.flag} width={24} height={14} />
+                <p>{state.details.country}</p>
+              </div>
+              <p>Age: {state.details.age}</p>
+              <p>Status: {state.details.isInfected ? 'Infected' : 'Cured'}</p>
             </div>
-            <div className="modal__action">mark as cured</div>
+            <div
+              className={`modal__action${
+                state.details.isInfected ? '' : ' modal__action--cured'
+              }`}
+            >
+              mark as {state.details.isInfected ? 'cured' : 'infected'}
+            </div>
           </div>
         </div>
       </div>
-    </SurvivorDetailsModal>
+    </SurvivorDetailsModalStyles>
   );
 }
