@@ -1,18 +1,21 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Image from 'next/image';
+import Context from '../../../state/Context';
+import { EnumFilters } from '../../../models';
+
+import { FilterStyles, MainStyles, NavStyles } from './styles';
 import ImgLogo from '../../../assets/logo.svg';
 import ImgDropdown from '../../../assets/dropdown.svg';
-import { FilterStyles, MainStyles, NavStyles } from './styles';
-
-enum EnumFilters {
-  ALL = 'all survivors',
-  INFECTED = 'infected survivors',
-  CURED = 'cured survivors',
-}
 
 export default function HomePage() {
   const [filter, setFilter] = useState(EnumFilters.ALL);
   const [isDropdownVisible, setDropdownVisibility] = useState(false);
+
+  const { state } = useContext(Context);
+
+  useEffect(() => {
+    console.log(state);
+  }, [state]);
 
   return (
     <>
