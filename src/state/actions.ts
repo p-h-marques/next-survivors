@@ -7,3 +7,10 @@ export function filterSelectUpdate(data: EnumFilters) {
     payload: data,
   };
 }
+
+export function filterInputUpdate(data: string) {
+  return {
+    type: types.FILTER_INPUT_UPDATE,
+    payload: data,
+  };
+}

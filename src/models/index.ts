@@ -15,7 +15,7 @@ export interface ISurvivor {
 
 export interface IGlobalActions {
   type: string;
-  payload: EnumFilters;
+  payload: EnumFilters & string;
 }
 
 export interface IGlobalState {

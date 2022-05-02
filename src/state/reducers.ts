@@ -12,6 +12,15 @@ function reducer(state: IGlobalState, action: IGlobalActions) {
         },
       };
 
+    case types.FILTER_INPUT_UPDATE:
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          input: action.payload,
+        },
+      };
+
     default:
       throw new Error();
   }

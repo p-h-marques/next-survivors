@@ -1,10 +1,11 @@
 import { FilterStyles } from './styles';
 import Select from '../../molecules/survivorsSelect';
+import Input from '../../molecules/survivorsInput';
 
 export default function Filter() {
   return (
     <FilterStyles>
-      <input type="text" placeholder="filter survivor by name" />
+      <Input />
       <Select />
     </FilterStyles>
   );
