@@ -7,7 +7,7 @@ export const SurvivorCardStyles = styled.div<ISurvivor>`
   column-gap: 8px;
   align-items: center;
   justify-content: flex-start;
-  box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: ${({ theme }) => theme.shadow};
   position: relative;
   background-color: ${({ isInfected, theme }) =>
     isInfected ? theme.colors.background_danger : 'unset'};

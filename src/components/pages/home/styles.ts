@@ -6,7 +6,7 @@ export const NavStyles = styled.nav`
   align-items: center;
   justify-content: center;
   column-gap: 8px;
-  box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.24);
+  box-shadow: ${({ theme }) => theme.shadow};
 `;
 
 export const MainStyles = styled.main`
