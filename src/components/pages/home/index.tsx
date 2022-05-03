@@ -9,6 +9,7 @@ import Filter from '../../organisms/filter';
 import Loading from '../../atoms/loading';
 import SurvivorsGrid from '../../organisms/survivorsGrid';
 import Modal from '../../organisms/modal';
+import Error from '../../atoms/error';
 
 export default function HomePage() {
   const { state } = useContext(Context);
@@ -26,11 +27,17 @@ export default function HomePage() {
       <MainStyles>
         <Filter />
         <div className="content">
-          <div style={{ display: state.loading ? 'block' : 'none' }}>
-            <Loading />
-          </div>
-          {state.error && !state.loading && <span>error!</span>}
-          {!state.loading && !state.error && <SurvivorsGrid />}
+          {state.loading && <Loading />}
+
+          {state.error && !state.loading && <Error />}
+
+          {!state.loading && !state.error && state.data.length === 0 && (
+            <Error />
+          )}
+
+          {!state.loading && !state.error && state.data.length > 0 && (
+            <SurvivorsGrid />
+          )}
         </div>
       </MainStyles>
       {state.details && <Modal></Modal>}
