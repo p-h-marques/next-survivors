@@ -7,6 +7,7 @@ export const NavStyles = styled.nav`
   justify-content: center;
   column-gap: 8px;
   box-shadow: ${({ theme }) => theme.shadow};
+  padding: 0px 40px;
 `;
 
 export const MainStyles = styled.main`
@@ -16,6 +17,7 @@ export const MainStyles = styled.main`
   align-items: center;
   justify-content: flex-start;
   row-gap: 60px;
+  padding: 0px 40px;
 
   .content {
     width: 100%;

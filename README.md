@@ -1,40 +1,34 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Next.JS - Survivors
 
-## Getting Started
+This repository contains a little application that list all survivors from a Zombie Apocalypse. This app was build with Next.js.
 
-First, run the development server:
+## How to see and execute project
+
+You can exec locally this application using Docker:
 
 ```bash
-npm run dev
-# or
-yarn dev
+docker compose up
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+To see a deployed version, you can access [here!](https://next-survivors.vercel.app/)
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## About Structure
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+- Next 12 with Typescript
+- EditorConfig, Eslind and Prettier setup
+- API Connection with MongoDB instance for get, search and edit survivors
+- Extra API Connection for nationality search, to get flag and country names
+- Context API used for global data in application
+- Docker setup for development
+- Atomic Design for project organization
+- Git Commitzen for commits pattern
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## About Features
 
-## Learn More
+- Empty data, loading and error treatments
+- View to show survivors name, image, nationality, age and infection status
+- Possibility to edit survivor infection status
 
-To learn more about Next.js, take a look at the following resources:
+## About Design
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
----
-
-# Extras
-
-usar node 14+
+- Responsiveness & pixel-perfect layout (you can see the Figma layout in [here](https://www.figma.com/file/lD6rVBNs10bPK6pqUrIzzm/PROCESSO---MaxiHost?node-id=11%3A148))
