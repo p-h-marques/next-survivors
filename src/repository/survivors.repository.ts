@@ -1,6 +1,6 @@
 import { EnumFilters, IFilters, IRequest, ISurvivor } from '../models';
 
-const url = 'http://localhost:3000/api/';
+const url = '/api/';
 
 function getInfectedStatus(select: EnumFilters): boolean | undefined {
   const status = {
