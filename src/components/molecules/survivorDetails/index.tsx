@@ -3,14 +3,35 @@ import { SurvivorDetailsModalStyles } from './styles';
 
 import ImgClose from '../../../assets/close.svg';
 import ImgCloseHover from '../../../assets/close_hover.svg';
-import { useContext, useState } from 'react';
+import { useCallback, useContext, useState } from 'react';
 import Context from '../../../state/Context';
-import { closeSurvivorDetails } from '../../../state/actions';
+import {
+  closeSurvivorDetails,
+  updateSurvivorDetails,
+} from '../../../state/actions';
+import { editInfectedStatus } from '../../../repository/survivors.repository';
+import Loading from '../../atoms/loading';
 
 export default function SurvivorDetails() {
   const { state, dispatch } = useContext(Context);
 
   const [image, setImage] = useState(ImgClose);
+  const [loading, setLoading] = useState(false);
+
+  const handleInfectedChange = useCallback(async () => {
+    setLoading(true);
+
+    const request = await editInfectedStatus(
+      state.details.id,
+      !state.details.isInfected,
+    );
+
+    if (request !== false) {
+      dispatch(updateSurvivorDetails(request.isInfected));
+
+      setLoading(false);
+    }
+  }, [state.details.id, state.details.isInfected, dispatch]);
 
   return (
     <SurvivorDetailsModalStyles>
@@ -42,12 +63,16 @@ export default function SurvivorDetails() {
               <p>Age: {state.details.age}</p>
               <p>Status: {state.details.isInfected ? 'Infected' : 'Cured'}</p>
             </div>
-            <div
-              className={`modal__action${
-                state.details.isInfected ? '' : ' modal__action--cured'
-              }`}
-            >
-              mark as {state.details.isInfected ? 'cured' : 'infected'}
+            <div className="modal__actions">
+              <div
+                onClick={handleInfectedChange}
+                className={`modal__action${
+                  state.details.isInfected ? '' : ' modal__action--cured'
+                }`}
+              >
+                mark as {state.details.isInfected ? 'cured' : 'infected'}
+              </div>
+              {loading && <Loading width={24} />}
             </div>
           </div>
         </div>

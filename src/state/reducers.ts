@@ -57,6 +57,15 @@ function reducer(state: IGlobalState, action: IGlobalActions) {
         details: null,
       };
 
+    case types.UPDATE_SURVIVOR_DETAILS:
+      return {
+        ...state,
+        details: {
+          ...state.details,
+          isInfected: action.payload,
+        },
+      };
+
     default:
       throw new Error();
   }

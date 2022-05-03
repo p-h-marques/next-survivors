@@ -32,7 +32,7 @@ const handler = async (
         .find({ _id: new ObjectId(req.query.survivor as string) })
         .toArray();
 
-      res.status(200).json(data);
+      res.status(200).json(data[0]);
       return true;
     }
 

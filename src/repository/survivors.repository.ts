@@ -1,4 +1,4 @@
-import { EnumFilters, IFilters, IRequest } from '../models';
+import { EnumFilters, IFilters, IRequest, ISurvivor } from '../models';
 
 const url = 'http://localhost:3000/api/';
 
@@ -31,5 +31,20 @@ export async function getSurvivors(filters: IFilters): Promise<IRequest> {
     return { ...defaultReturn, data: response };
   } catch (error) {
     return { ...defaultReturn, error: true };
+  }
+}
+
+export async function editInfectedStatus(
+  id: string,
+  infected: boolean,
+): Promise<ISurvivor | false> {
+  try {
+    const request = await fetch(url + id + '/infected?value=' + infected, {
+      method: 'PUT',
+    });
+    const response = await request.json();
+    return response;
+  } catch (error) {
+    return false;
   }
 }

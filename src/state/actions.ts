@@ -41,3 +41,10 @@ export function closeSurvivorDetails() {
     type: types.CLOSE_SURVIVOR_DETAILS,
   };
 }
+
+export function updateSurvivorDetails(data: boolean) {
+  return {
+    type: types.UPDATE_SURVIVOR_DETAILS,
+    payload: data,
+  };
+}

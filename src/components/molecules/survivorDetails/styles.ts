@@ -70,6 +70,14 @@ export const SurvivorDetailsModalStyles = styled.div`
       column-gap: 4px;
     }
 
+    &__actions {
+      display: flex;
+      column-gap: 8px;
+      align-items: center;
+      justify-content: flex-start;
+      height: 32px;
+    }
+
     &__action {
       font-size: 14px;
       line-height: 14px;

@@ -22,6 +22,7 @@ export default function SurvivorCard(props: ISurvivor) {
 
   const handleSurvivorDetails = useCallback(() => {
     const survivorDetails: ISurvivorDetails = {
+      id: props._id,
       name: props.name,
       age: props.age,
       isInfected: props.isInfected,

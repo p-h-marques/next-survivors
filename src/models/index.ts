@@ -30,6 +30,7 @@ export interface IRequest {
 }
 
 export interface ISurvivorDetails {
+  id: string;
   name: string;
   age: number;
   isInfected: boolean;
