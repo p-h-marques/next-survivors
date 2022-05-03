@@ -7,9 +7,14 @@ import { useCallback, useContext, useState } from 'react';
 import Context from '../../../state/Context';
 import {
   closeSurvivorDetails,
+  loadingStatusUpdate,
+  requestUpdate,
   updateSurvivorDetails,
 } from '../../../state/actions';
-import { editInfectedStatus } from '../../../repository/survivors.repository';
+import {
+  editInfectedStatus,
+  getSurvivors,
+} from '../../../repository/survivors.repository';
 import Loading from '../../atoms/loading';
 
 export default function SurvivorDetails() {
@@ -33,6 +38,18 @@ export default function SurvivorDetails() {
     }
   }, [state.details.id, state.details.isInfected, dispatch]);
 
+  const handleModalClose = useCallback(() => {
+    dispatch(closeSurvivorDetails());
+
+    async function actions() {
+      dispatch(loadingStatusUpdate(true));
+      const request = await getSurvivors(state.filters);
+      dispatch(requestUpdate(request));
+    }
+
+    actions();
+  }, [state.filters, dispatch]);
+
   return (
     <SurvivorDetailsModalStyles>
       <div className="modal">
@@ -42,7 +59,7 @@ export default function SurvivorDetails() {
             src={image}
             onMouseEnter={() => setImage(ImgCloseHover)}
             onMouseLeave={() => setImage(ImgClose)}
-            onClick={() => dispatch(closeSurvivorDetails())}
+            onClick={handleModalClose}
             style={{ cursor: 'pointer' }}
             width={16}
             height={16}
