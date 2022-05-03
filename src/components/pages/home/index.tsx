@@ -8,7 +8,7 @@ import ImgLogo from '../../../assets/logo.svg';
 import Filter from '../../organisms/filter';
 import Loading from '../../atoms/loading';
 import SurvivorsGrid from '../../organisms/survivorsGrid';
-import SurvivorDetails from '../../molecules/survivorDetails';
+import Modal from '../../organisms/modal';
 
 export default function HomePage() {
   const { state } = useContext(Context);
@@ -33,7 +33,7 @@ export default function HomePage() {
           {!state.loading && !state.error && <SurvivorsGrid />}
         </div>
       </MainStyles>
-      {state.details && <SurvivorDetails></SurvivorDetails>}
+      {state.details && <Modal></Modal>}
     </>
   );
 }
