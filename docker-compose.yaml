@@ -1,0 +1,20 @@
+version: '3.5'
+services:
+  front:
+    image: next-survivors-image
+    container_name: next-survivors
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - '3000:3000'
+    volumes:
+      - type: bind
+        source: ./
+        target: /usr/app
+    networks:
+      - front
+
+networks:
+  front:
+    name: front
