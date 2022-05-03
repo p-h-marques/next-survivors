@@ -6,8 +6,6 @@ const handler = async (
   req: NextApiRequest,
   res: NextApiResponse,
 ): Promise<boolean> => {
-  console.log(req.query);
-
   try {
     if (req.method === 'PUT') {
       const client = await clientPromise;

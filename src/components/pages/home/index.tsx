@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import Image from 'next/image';
 import Context from '../../../state/Context';
 
@@ -13,10 +13,6 @@ import Error from '../../atoms/error';
 
 export default function HomePage() {
   const { state } = useContext(Context);
-
-  useEffect(() => {
-    console.log(state);
-  }, [state]);
 
   return (
     <>
